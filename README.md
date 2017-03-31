@@ -126,7 +126,5 @@ Here's is [my sitemap](./documentation/sitemap.png)
 
 ## Annotations / References Used
 
-(___TODO__: list any tutorials/references/etc. that you've based your code off of_)
-
-1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
-2. [tutorial on vue.js](https://vuejs.org/v2/guide/) - (add link to source code that was based on this)
+1. [Google APIs](https://console.developers.google.com/apis/library) - Link to the Google API library
+2. [Google Plugins](https://helpx.adobe.com/flash-player/kb/enabling-flash-player-chrome.html) - Link to google plug in help  
