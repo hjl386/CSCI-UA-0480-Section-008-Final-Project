@@ -28,6 +28,9 @@ An Example User:
   reviews: // an array of reviews other users placed about you, 
   critiques: // an array of critiques you wrote about other users
 }
+//Will include an image in the future
+//Will include a short description in the future 
+//Will include potential ability to write a daily post/tweet
 ```
 
 An Example Match Array:
@@ -109,33 +112,26 @@ Here's is [my sitemap](./documentation/sitemap.png)
 
 ## User Stories or Use Cases
 
-(___TODO__: write out how your application will be used through [user stories](http://en.wikipedia.org/wiki/User_story#Format) and / or [use cases](https://www.mongodb.com/download-center?jmp=docs&_ga=1.47552679.1838903181.1489282706#previous)_)
-
-1. as non-registered user, I can register a new account with the site
-2. as a user, I can log in to the site
-3. as a user, I can create a new grocery list
-4. as a user, I can view all of the grocery lists I've created in a single list
-5. as a user, I can add items to an existing grocery list
-6. as a user, I can cross off items in an existing grocery list
-
+1. As a non-registered user I can read more about the site and its purpose or I can sign up for an account
+2. As a registered user I can view my profile and edit certain aspects
+3. As a user I can view my reviews written by other users 
+4. As a user I can view my critiques of other users 
+5. As a user I can check todays matches and debating on my hasSwipes status it will react differently (My site map will reflect this in the future)
+6. As a user I can make matches (my site map will reflect a chatting or appointment functionality)
+  
 ## Research Topics
 
-(___TODO__: the research topics that you're planning on working on along with their point values... and the total points of research topics listed_)
+* (1 points) Integrate user authentication
+    * I will be validating the persons account via email, as of now only NYU students will be allowed to make an account  
+* (5 points) Integrate Google API's, such as: calendar, map, and share
+    * I will use the calendar option to save the date (Will add this later on to the rest of my code) 
+    * I will use the map location to ping a place for either person to meet at (unless they want to meet at the dining hall) 
+    * I will implement some share function to allow this to be added to social media
+* (5 points) Create google plugins
+    * I will create plugins so users can recieve notifications 
 
-* (5 points) Integrate user authentication
-    * I'm going to be using passport for user authentication
-    * And account has been made for testing; I'll email you the password
-    * see <code>cs.nyu.edu/~jversoza/ait-final/register</code> for register page
-    * see <code>cs.nyu.edu/~jversoza/ait-final/login</code> for login page
-* (4 points) Perform client side form validation using a JavaScript library
-    * see <code>cs.nyu.edu/~jversoza/ait-final/my-form</code>
-    * if you put in a number that's greater than 5, an error message will appear in the dom
-* (5 points) vue.js
-    * used vue.js as the frontend framework; it's a challenging library to learn, so I've assigned it 5 points
-
-10 points total out of 8 required points (___TODO__: addtional points will __not__ count for extra credit_)
-
-
+11 points total out of 8 required points
+ 
 ## [Link to Initial Main Project File](app.js) 
 
 (___TODO__: create a skeleton Express application with a package.json, app.js, views folder, etc. ... and link to your initial app.js_)
