@@ -1,18 +1,12 @@
-The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
-
-(___TODO__: your project name_)
-
-# Shoppy Shoperson 
+# SwipeMe  
 
 ## Overview
 
-(___TODO__: a brief one or two paragraph, high-level description of your project_)
+Do you ever feel hungry and lonely?  Well this is the perfect place for you, 2 in 1, get your meal swipes and meet the cute girl/guy of your dream with SwipeME.  Essentially this is tinder with a gauranteed free meal! 
 
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
-
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
-
-
+SwipeMe is a web application that will allow users to 'swipe' right or left depending on their preferences.  "Oh she fine" or "Mmhmm he's cute" matching them with fellow NYU students. 
+Each user has 2 options to identify themselves as, they can either be a 'Swiper' or a 'Needy'.  When identified as a Swiper you have an unlimited amount of people you can swipe past until you choose 3 people to match with for that day.  When you are a Needy then you can only look at a set number of people per day.  
+As a Swiper because you are the one using your meal swipes they have a guarantee match with whoever they choose.  However, as a Needy its just the waiting game for you buddy.  
 ## Data Model
 
 (___TODO__: a description of your application's data and their relationships to each other_) 
