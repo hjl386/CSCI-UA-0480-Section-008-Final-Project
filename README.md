@@ -9,36 +9,78 @@ Each user has 2 options to identify themselves as, they can either be a 'Swiper'
 As a Swiper because you are the one using your meal swipes they have a guarantee match with whoever they choose.  However, as a Needy its just the waiting game for you buddy.  
 ## Data Model
 
-(___TODO__: a description of your application's data and their relationships to each other_) 
+The application will store Users, Matches and Reviews of the people (Comments) 
 
-The application will store Users, Lists and Items
-
-* users can have multiple lists (via references)
-* each list can have multiple items (by embedding)
-
-(___TODO__: sample documents_)
+* users can have multiple matches (by embedding)
+* users can have multiple reviews about them as well (by embedding) 
+* users can comment about multiple people (by embedding) 
 
 An Example User:
 
 ```javascript
 {
-  username: "shannonshopper",
-  hash: // a password hash,
-  lists: // an array of references to List documents
+  username: "SadBoi Hanjie",
+  password: // a password hash,
+  email: whyamIsolonelyandhungry@nyu.edu,
+  hasSwipes: false,
+  title: Han Jie,
+  matches: // an array of other users that were matched, 
+  reviews: // an array of reviews other users placed about you, 
+  critiques: // an array of critiques you wrote about other users
 }
 ```
 
-An Example List with Embedded Items:
+An Example Match Array:
 
 ```javascript
 {
-  user: // a reference to a User object
-  name: "Breakfast foods",
-  items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
+  username: "Why am I like this Drew",
+  hasSwipes: true,
+  title: "Andrew"
+}
+```
+
+An Example Review Array:
+
+```javascript
+{
+  username: "Why am I like this Drew",
+  comments: "He is the most beautiful man I know",
+  rating: 10
+}
+```
+
+An Example Critique Array:
+
+```javascript
+{
+  username: "Why am I like this Drew",
+  comments: "He was aye",
+  rating: 2
+}
+```
+
+An Example User with Embedded Matches, Reviews, and Critiques:
+
+```javascript
+{
+  username: "SadBoi Hanjie",
+  password: // a password hash,
+  email: whyamIsolonelyandhungry@nyu.edu,
+  hasSwipes: false,
+  title: Han Jie,
+  matches: [
+     { username: "Why am I like this Drew", hasSwipes: true, title: "Andrew" },
+     { username: "JSON FILES", hasSwipes: false, title: "Jason" } //Because he is false, it means I was true at that time
+  ], 
+  reviews: [
+     { username: "Why am I like this Drew", comments: "He is the most beautiful man I know", rating: 10}
   ],
-  createdAt: // timestamp
+  // an array of reviews other users placed about you, 
+  critiques: [
+     { username: "Why am I like this Drew", comments: "He was aye", rating: 2}
+  ]
+  // an array of critiques you wrote about other users
 }
 ```
 
