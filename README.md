@@ -134,8 +134,6 @@ Here's is [my sitemap](./documentation/sitemap.png)
  
 ## [Link to Initial Main Project File](app.js) 
 
-(___TODO__: create a skeleton Express application with a package.json, app.js, views folder, etc. ... and link to your initial app.js_)
-
 ## Annotations / References Used
 
 (___TODO__: list any tutorials/references/etc. that you've based your code off of_)
