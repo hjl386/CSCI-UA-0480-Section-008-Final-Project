@@ -92,19 +92,9 @@ An Example User with Embedded Matches, Reviews, and Critiques:
 
 ## Wireframes
 
-(___TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc._)
+This shows all page images - Sorry for the mess, they will look nicer next time and will incorporate them all
 
-/list/create - page for creating a new shopping list
-
-![list create](documentation/list-create.png)
-
-/list - page for showing all shopping lists
-
-![list](documentation/list.png)
-
-/list/slug - page for showing specific shopping list
-
-![list](documentation/list-slug.png)
+![All Site Images](documentation/wireframe.png)
 
 ## Site map
 
