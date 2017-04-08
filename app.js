@@ -3,7 +3,7 @@
 const express = require('express');
 const session = require('express-session');
 const app = express();
-const [PORT, HOST] = [3000, '127.0.0.1'];
+const PORT = 3000;
 const bodyParser = require('body-parser');
 
 const path = require('path');
@@ -81,4 +81,4 @@ app.post('/:slug', (req, res) => {
 	});
 });
 
-app.listen(PORT, HOST);
+app.listen(process.env.PORT || PORT);

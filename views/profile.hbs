@@ -6,13 +6,13 @@
 {{#each users as |user|}}
 	<h1>{{user.title}}!! </h1> (<a href='/profile'>Profile Submit</a>)
 	{{#each user.matches as |match|}}
-		<br><h3>{{match.username}}</h3>
+		<h3>{{match.username}}</h3>
 	{{/each}}
 	{{#each user.reviews as |review|}}
-		<br><h3>{{review.comments}}</h3>
+		<h3>{{review.comments}}</h3>
 	{{/each}}
 	{{#each user.critiques as |critiques|}}
-		<br><h3>{{critiques.comments}}</h3>
+		<h3>{{critiques.comments}}</h3>
 	{{/each}}	
 {{/each}}
 
@@ -26,12 +26,12 @@
 
 <br><p> Other info will be added soon </p><br>
 <form method='POST' action=''>
-	Review Comment: <textarea rows='4' cols='50'> <input type='text' name='comments' value=''> </textarea>
+	Review Comment: <textarea rows='4' cols='50'name='comments' value=''> </textarea>
 	<br><input type='submit' value='REVIEW THEM'>
 </form>
 
 <br><p> For now self critiques are allowed until I implement more users </p><br>
 <form method='POST' action=''>
-	Critique Comment: <textarea rows='4' cols='50'> <input type='text' name='comments' value=''> </textarea>
+	Critique Comment: <textarea rows='4' cols='50' name='comments' value=''> </textarea>
 	<br><input type='submit' value='YOUR CRITIQUE'>
 </form>
