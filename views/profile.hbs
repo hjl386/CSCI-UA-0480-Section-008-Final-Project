@@ -2,21 +2,36 @@
 <h1> PROFILE SUBMIT </h1>
 </center>
 
-{{#each users}}
-	Username: {[this.username}} <br>
-	Email: {{this.email}} <br>
-	Title: {{this.title}} <br>
-	Provider or Leecher: {{this.category}} <br>
-	<a href='{{this.matches}}'>Match History</a> <br>
-	<a href='{{this.reviews}}'>What do people think about you?</a> <br>
-	<a href='{{this.critiques}}'>What do you think about people?</a> <br>
+<h2> I will fix the repeat values, need to change from a each loop to something else </h2>
+{{#each users as |user|}}
+	<h1>{{user.title}}!! </h1> (<a href='/profile'>Profile Submit</a>)
+	{{#each user.matches as |match|}}
+		<br><h3>{{match.username}}</h3>
+	{{/each}}
+	{{#each user.reviews as |review|}}
+		<br><h3>{{review.comments}}</h3>
+	{{/each}}
+	{{#each user.critiques as |critiques|}}
+		<br><h3>{{critiques.comments}}</h3>
+	{{/each}}	
 {{/each}}
 
+<br>
+<h3> Will add the rest from the schema later, looking into inputing true or false values </h3>
+<br><p> For now you can type matches in </p><br>
 <form method='POST' action=''>
-	Username: <input type='text' name='username' value=''><br>
-	Email: <input type='text' name='email' value=''><br>
-	Title: <input type='text' name='title' value=''><br>
-	<input type='radio' name='swipes' value='hasSwipes'>Yes, I have swipes<br>
-	<input type='radio' name='swipes' value='hasSwipes'>No, I do not have swipes<br>
-	<input type='submit' value='Make Profile'>	
+	Match Username: <input type='text' name='username' value=''>
+	<input type='submit' value='Who did you match with?'>
+</form>
+
+<br><p> Other info will be added soon </p><br>
+<form method='POST' action=''>
+	Review Comment: <textarea rows='4' cols='50'> <input type='text' name='comments' value=''> </textarea>
+	<br><input type='submit' value='REVIEW THEM'>
+</form>
+
+<br><p> For now self critiques are allowed until I implement more users </p><br>
+<form method='POST' action=''>
+	Critique Comment: <textarea rows='4' cols='50'> <input type='text' name='comments' value=''> </textarea>
+	<br><input type='submit' value='YOUR CRITIQUE'>
 </form>

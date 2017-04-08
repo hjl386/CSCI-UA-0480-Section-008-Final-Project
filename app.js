@@ -34,6 +34,15 @@ app.get('/', (req, res) => {
 	res.render('index');
 });
 
+app.get('/profile', (req, res) => {
+	User.find({}, (err, users) => {
+		if(err){
+			console.log(err);
+		}
+		res.render('people', {users: users});
+	});
+});
+
 app.post('/profile', (req, res) => {
 	const user = new User({
 		username: req.body.username,
@@ -72,24 +81,4 @@ app.post('/:slug', (req, res) => {
 	});
 });
 
-/*
-app.post('/:slug', (req, res) => {
-	const u = new User({
-		username: req.body.username,
-		//password: req.body.password, //hashed value
-		email: req.body.email,
-		hasSwipes: req.body.hasSwipes,
-		title: req.body.title,
-		matches: req.body.matches,
-		reviews: req.body.reviews,
-		critiques: req.body.critiques
-	});
-	u.save((err) => {
-		if(err){
-			console.log(err);
-		}
-		res.redirect('/profile');
-	});
-});
-*/
 app.listen(PORT, HOST);
