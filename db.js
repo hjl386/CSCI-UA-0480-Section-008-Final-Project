@@ -10,7 +10,7 @@ const Match = new mongoose.Schema({
 	title: String,					//Title 
 });
 //Array of all the people a user matched with 
-Match.plugin(URLSlugs('title'));
+//Match.plugin(URLSlugs('title'));
 
 const Review = new mongoose.Schema({
 	username: String,				//The user who commented 
@@ -37,10 +37,26 @@ const User = new mongoose.Schema({
 User.plugin(URLSlugs('title'));
 //User schema - Identifies each individual 
 
+// PROVIDED CODE FOR DATABASE DEPLOYMENT ON TO CIMS 
+//Checks to see if the environment variable, NODE_ENV is set to PRODUCTION?
+if (process.env.NODE_ENV === 'PRODUCTION'){
+	//If we're in PRODUCTION mode, then read the configuration from a file 
+	//Use Blocking file IO to do this ... 
+	var fs = require('fs');
+	var path = require('path');
+	var fn = path.join(__dirname, 'config.json');
+ 	var data = fs.readFileSync(fn);
+	 // our configuration file will be in json, so parse it and set the conenction string appropriately!
+	var conf = JSON.parse(data);
+	var dbconf = conf.dbconf;
+} else {
+	// if we're not in PRODUCTION mode, then use
+	dbconf = 'mongodb://localhost/hjl386';
+}
 
 mongoose.model('User', User);
 mongoose.model('Match', Match);
 mongoose.model('Review', Review);
 mongoose.model('Critique', Critique);
 
-mongoose.connect('mongodb://localhost/finalProject');
+mongoose.connect(dbconf);

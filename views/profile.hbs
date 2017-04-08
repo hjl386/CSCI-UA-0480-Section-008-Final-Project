@@ -1,8 +1,22 @@
+<center>
+<h1> PROFILE SUBMIT </h1>
+</center>
+
 {{#each users}}
-	{{this.title}}
+	Username: {[this.username}} <br>
+	Email: {{this.email}} <br>
+	Title: {{this.title}} <br>
+	Provider or Leecher: {{this.category}} <br>
+	<a href='{{this.matches}}'>Match History</a> <br>
+	<a href='{{this.reviews}}'>What do people think about you?</a> <br>
+	<a href='{{this.critiques}}'>What do you think about people?</a> <br>
 {{/each}}
 
 <form method='POST' action=''>
-	Something: <input type='text' name='something' value=''>
-	<input type='submit' value='Something'>	
+	Username: <input type='text' name='username' value=''><br>
+	Email: <input type='text' name='email' value=''><br>
+	Title: <input type='text' name='title' value=''><br>
+	<input type='radio' name='swipes' value='hasSwipes'>Yes, I have swipes<br>
+	<input type='radio' name='swipes' value='hasSwipes'>No, I do not have swipes<br>
+	<input type='submit' value='Make Profile'>	
 </form>

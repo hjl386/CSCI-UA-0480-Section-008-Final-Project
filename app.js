@@ -31,11 +31,30 @@ app.get('/css/base.css', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-	res.render('home');
+	res.render('index');
+});
+
+app.post('/profile', (req, res) => {
+	const user = new User({
+		username: req.body.username,
+		email: req.body.email,
+		hasSwipes: req.body.hasSwipes,
+		title: req.body.title,
+		matches: req.body.matches,
+		reviews: req.body.reviews, 
+		critiques: req.body.critiques
+	});
+	user.save((err) => {
+		if(err){
+			console.log(err);
+		} else{
+			res.redirect('/profile');
+		}
+	});
 });
 
 app.get('/:slug', (req, res) => {
-	User.find({}, (err, users) => {
+	User.find({slug: req.params.slug}, (err, users) => {
 		if(err){
 			console.log(err);
 		}
@@ -43,6 +62,17 @@ app.get('/:slug', (req, res) => {
 	});
 });
 
+app.post('/:slug', (req, res) => {
+	User.findOneAndUpdate({slug: req.params.slug}, {$push: {matches: {username: req.body.username, hasSwipes: req.body.hasSwipes, title: req.body.title}, reviews: {username: req.body.username, comments: req.body.comments, rating: req.body.rating}, critiques: {username: req.body.username, comments: req.body.comments, rating: req.body.rating}}}, (err) => {
+		if(err){
+			console.log(err);
+		} else {
+			res.redirect(req.params.slug);
+		}
+	});
+});
+
+/*
 app.post('/:slug', (req, res) => {
 	const u = new User({
 		username: req.body.username,
@@ -61,5 +91,5 @@ app.post('/:slug', (req, res) => {
 		res.redirect('/profile');
 	});
 });
-
+*/
 app.listen(PORT, HOST);
