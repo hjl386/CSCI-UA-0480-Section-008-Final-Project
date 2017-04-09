@@ -113,14 +113,16 @@ Here's is [my sitemap](./documentation/sitemap.png)
 
 * (1 points) Integrate user authentication
     * I will be validating the persons account via email, as of now only NYU students will be allowed to make an account  
+	 * Use passport-remember-me to authenticate
 * (5 points) Integrate Google API's, such as: calendar, map, and share
     * I will use the calendar option to save the date (Will add this later on to the rest of my code) 
     * I will use the map location to ping a place for either person to meet at (unless they want to meet at the dining hall) 
     * I will implement some share function to allow this to be added to social media
 * (5 points) Create google plugins
     * I will create plugins so users can recieve notifications 
-
-11 points total out of 8 required points
+* (5 points) Push Notifications 
+	 * Using Chrome 42 and its new service workers I will create push notifications for interactive designs
+16 points total out of 8 required points
  
 ## [Link to Initial Main Project File](app.js) 
 
@@ -128,3 +130,5 @@ Here's is [my sitemap](./documentation/sitemap.png)
 
 1. [Google APIs](https://console.developers.google.com/apis/library) - Link to the Google API library
 2. [Google Plugins](https://helpx.adobe.com/flash-player/kb/enabling-flash-player-chrome.html) - Link to google plug in help  
+3. [Push Notifications](http://www.theverge.com/2015/4/20/8454613/push-notifications-android-chrome-42-mobile-web) - Chrome 42 release
+4. [Push Notifications](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers) - Push notifications 

@@ -1,3 +1,25 @@
+<center>
 <h1> HOME PAGE </h1>
 
+<h2> New User? Register Now </h2>
+
+
+
+<h2> Back For More? </h2>
+</center>
+
+
 <a href='/profile'>Profile </a>
+
+{{#if loggedIn}}
+	<h1> You are logged in as {{username}} </h1>
+	<h2><a href='/logout'>Logout</a></h2>
+{{else if loggedOut}}
+	<h1> You are not logged in <h1>
+	<h2>
+	<a href='/register'>Register</a> | 
+	<a href='/login'>Login</a>
+	<br>
+{{/if}} 
+
+

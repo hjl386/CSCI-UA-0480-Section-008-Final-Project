@@ -12,6 +12,11 @@ const Match = new mongoose.Schema({
 //Array of all the people a user matched with 
 //Match.plugin(URLSlugs('title'));
 
+const Login = new mongoose.Schema({
+	username: {type: String, unique: true},
+	password: String
+});
+
 const Review = new mongoose.Schema({
 	username: String,				//The user who commented 
 	comments: String,				//Comment
@@ -60,5 +65,5 @@ mongoose.model('User', User);
 mongoose.model('Match', Match);
 mongoose.model('Review', Review);
 mongoose.model('Critique', Critique);
-
+mongoose.model('Login', Login);
 

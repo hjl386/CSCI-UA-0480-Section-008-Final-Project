@@ -1,0 +1,15 @@
+<h1> Login </h1>
+
+<form method='POST' action=''>
+	Username: <input type='text' name='username' value=''> <br>
+	Password: <input type='password' name='password' value=''> <br>
+	<input type='submit' value='Login'>
+</form>
+
+{{#if loginNotExists}}
+	<h1> Sorry but the username does not exist </h1>
+{{else if fail}}
+	<h1> Sorry but the password was incorrect </h1>
+{{/if}}
+
+<h2> Want To <a href='/'>Go Home?</a> </h2>

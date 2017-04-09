@@ -1,0 +1,15 @@
+<h1> Register </h1>
+
+<form method='POST' action=''>
+	Username: <input type='text' name='username' value=''> <br>
+	Password: <input type='password' name='password' value=''> <br>
+	<input type='submit' value='Register'>
+</form>
+
+{{#if passwordLength}}
+	<h1> Sorry but the inputed password is too short </h1>
+{{else if loginExists}}
+	<h1> Sorry but the username already exists </h1>
+{{/if}}
+
+<h2> Want To <a href='/'>Go Home?</a> </h2>
