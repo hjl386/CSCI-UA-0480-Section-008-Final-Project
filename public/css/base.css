@@ -1,4 +1,76 @@
-body{
+body{ 	/* General */
 	background:linear-gradient(to right, #ADD8E6, #FFFFFF);
 	color: black;
 }
+
+.header{ 		/*userHome.hbs*/
+	position: fixed;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #000000;
+	padding: 8.5px 20px;
+}
+
+.welcome{ 		/*userHome.hbs*/
+	color: #f2f2f2;	
+	font-size: 30px;
+	display: block;
+	float: left;
+}
+/*
+.welcome:hover{
+	background-color:hotpink;
+}
+The hover over function does not work yet
+*/
+
+.edit{ 		/*userHome.hbs*/
+	display: block;
+	color: #f2f2f2;
+	font-size: 25px;
+	text-decoration: none;
+	padding-right: 30px;
+	float: right;
+}
+
+.userHomeBlog{ 		/*userHome.hbs*/
+	display: block;
+	margin-left: 20%;
+	margin-top: 55px; 
+	padding-right: 5px;
+	position: relative;
+	overflow-y: auto;
+}
+
+.sidebarBody{ 		/*userHome.hbs*/
+	margin: 0;
+}
+
+.sidebarUL{		 /*userHome.hbs*/
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	top: 53px;
+	left: 0;
+	text-align: center;
+	width: 18%;
+	background-color: #bdfff3;
+	position: fixed;
+	height: 100%; 
+	overflow: auto; 
+}
+
+li a{ 		/*userHome.hbs*/
+	display: block;
+	color: #000000; 
+	padding: 8px 16px;
+	text-decoration: none;
+}	
+
+li a:hover{ 		/*userHome.hbs*/
+	background-color:#4CAF50;
+	color: white;
+}
+
