@@ -58,7 +58,7 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
 	if(req.body.regUsername){
-		console.log("REGBOOL");
+		console.log("REGBOOL");		//TEST CODE
 		if(req.body.regPassword.length < 8){
 			res.render('index', {passwordLength: true});
 		} else{
@@ -95,7 +95,7 @@ app.post('/', (req, res) => {
 			});
 		}
 	} else if(req.body.logUsername){
-		console.log("LOGBOOL");
+		console.log("LOGBOOL");		//TEST CODE
 		Login.findOne({username: req.body.logUsername}, (err, login) => {
 			if(err){
 				console.log(err);
@@ -125,6 +125,12 @@ app.post('/', (req, res) => {
 	}
 });
 
+app.get('/userHome', (req, res) => {
+	console.log(req.session.username);	//TEST CODE
+	res.render('userHome', {username: req.session.username});
+});
+
+/*
 app.get('/login', (req, res) => {
 	res.render('login');
 });
@@ -155,7 +161,7 @@ app.post('/login', (req, res) => {
 		}
 	});
 });
-
+*/
 app.get('/logout', (req, res) => {
 	req.session.destroy(err => {
 		if(err){
