@@ -83,7 +83,7 @@ app.post('/', (req, res) => {
 							req.session.regenerate(err => {
 								if(!err){
 									req.session.username = loginHash.username;
-									res.redirect('/userHome');
+									res.redirect('/makeProfile');
 								} else {
 									console.log(err);
 									res.send('An error has occured, see the server logs for more information');
@@ -125,43 +125,11 @@ app.post('/', (req, res) => {
 	}
 });
 
-app.get('/userHome', (req, res) => {
+app.get('/userHome', (req, res) => {  //NEED TO ADD REST OF THE FEATURES 
 	console.log(req.session.username);	//TEST CODE
 	res.render('userHome', {username: req.session.username});
 });
 
-/*
-app.get('/login', (req, res) => {
-	res.render('login');
-});
-
-app.post('/login', (req, res) => {
-	Login.findOne({username: req.body.username}, (err, login) => {
-		if(err){
-			console.log(err);
-			res.send('An error has occured, see the server logs for more information');
-		} else if(!err && login){
-			bcrypt.compare(req.body.password, login.password, (err, passwordMatch) => {
-				if(passwordMatch){
-					req.session.regenerate(err => {
-						if(!err){
-							req.session.username = login.username;
-							res.redirect('/');
-						} else {
-							console.log(err);
-							res.send('An error has occured, see the server logs for more information');	
-						}		
-					});
-				} else {
-					res.render('login', {fail: true});
-				}
-			});			
-		} else{
-			res.render('login', {loginNotExists: true});
-		}
-	});
-});
-*/
 app.get('/logout', (req, res) => {
 	req.session.destroy(err => {
 		if(err){
@@ -172,21 +140,18 @@ app.get('/logout', (req, res) => {
 	});	
 });
 
-app.get('/profile', (req, res) => {
-	User.find({}, (err, users) => {
-		if(err){
-			console.log(err);
-		}
-		res.render('people', {users: users});
-	});
+app.get('/makeProfile', (req, res) => {
+		res.render('makeProfile');
 });
 
-app.post('/profile', (req, res) => {
+app.post('/makeProfile', (req, res) => {
+	console.log('req.body.swipes ', req.body.swipes);		//TEST CODE
 	const user = new User({
-		username: req.body.username,
+		username: req.session.username,
 		email: req.body.email,
-		hasSwipes: req.body.hasSwipes,
-		title: req.body.title,
+		hasSwipes: req.body.swipes,
+		nickname: req.body.nickname,
+		bio: req.body.bio,
 		matches: req.body.matches,
 		reviews: req.body.reviews, 
 		critiques: req.body.critiques
@@ -195,7 +160,28 @@ app.post('/profile', (req, res) => {
 		if(err){
 			console.log(err);
 		} else{
-			res.redirect('/profile');
+			req.session.email = user.email;
+			console.log("SAVING");
+			res.redirect('/userHome');
+		}
+	});
+});
+
+app.get('/editProfile', (req, res) => {
+	User.find({}, (err, users) => {
+		if(err){
+			console.log(err);
+		}
+		res.render('editProfile', {users: users});
+	});
+});
+
+app.post('/editProfile', (req, res) => {
+	User.findOneAndUpdate({username: req.session.username}, {$set: {email: req.body.email, nickname: req.body.nickname, bio: req.body.bio, hasSwipes: req.body.swipes}}, (err) => {
+		if(err) {
+			console.log(err);
+		} else {
+			res.redirect('/userHome');
 		}
 	});
 });
@@ -210,7 +196,7 @@ app.get('/:slug', (req, res) => {
 });
 
 app.post('/:slug', (req, res) => {
-	User.findOneAndUpdate({slug: req.params.slug}, {$push: {matches: {username: req.body.username, hasSwipes: req.body.hasSwipes, title: req.body.title}, reviews: {username: req.body.username, comments: req.body.comments, rating: req.body.rating}, critiques: {username: req.body.username, comments: req.body.comments, rating: req.body.rating}}}, (err) => {
+	User.findOneAndUpdate({slug: req.params.slug}, {$push: {matches: {username: req.body.username, hasSwipes: req.body.hasSwipes, nickname: req.body.nickname}, reviews: {username: req.body.username, comments: req.body.comments, rating: req.body.rating}, critiques: {username: req.body.username, comments: req.body.comments, rating: req.body.rating}}}, (err) => {
 		if(err){
 			console.log(err);
 		} else {

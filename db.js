@@ -4,6 +4,11 @@ const mongoose = require('mongoose');
 const URLSlugs = require('mongoose-url-slugs');
 //Slugs would be used whenever we are on the users profile to identify them 
 
+const Login = new mongoose.Schema({
+	username: {type: String, unique: true},
+	password: String
+});
+
 const Match = new mongoose.Schema({
 	username: String,				//To identify who you matched with 
 	hasSwipes: Boolean,				//By default would be the opposite of the User they matched with, can be false or true, depending on what the user was set at when they first matched 
@@ -11,11 +16,6 @@ const Match = new mongoose.Schema({
 });
 //Array of all the people a user matched with 
 //Match.plugin(URLSlugs('title'));
-
-const Login = new mongoose.Schema({
-	username: {type: String, unique: true},
-	password: String
-});
 
 const Review = new mongoose.Schema({
 	username: String,				//The user who commented 
@@ -30,16 +30,16 @@ const Critique = new mongoose.Schema({
 });
 
 const User = new mongoose.Schema({
-	username: String, 				//Unique Username, will have to do validation
-	//password: Hashed password value 		//Will implement 
+	username: {type: String, unique:true}, 				//Unique Username, will have to do validation
 	email: String, 					//Will parse to check for @NYU (Validation)
 	hasSwipes: {type: Boolean, default:false},	//False - Needs Swipes, True - Provides Swipes
-	title: String,					//Used for the slug, what people see you as
+	nickname: String,					//Used for the slug, what people see you as
+	bio: String,
 	matches: [Match],				//Array of the people they matched to
 	reviews: [Review],				//Array of reviews other users wrote about you
 	critiques: [Critique]				//Array of critiques you wrote about other users
 });
-User.plugin(URLSlugs('title'));
+User.plugin(URLSlugs('username'));
 //User schema - Identifies each individual 
 
 // PROVIDED CODE FOR DATABASE DEPLOYMENT ON TO CIMS 
