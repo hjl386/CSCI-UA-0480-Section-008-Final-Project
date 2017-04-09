@@ -53,12 +53,10 @@ if (process.env.NODE_ENV === 'PRODUCTION'){
 	const data = fs.readFileSync(fn);
 	// our configuration file will be in json, so parse it and set the conenction string appropriately!
 	const conf = JSON.parse(data);
-	const dbconf = conf.dbconf;
-	mongoose.connect(dbconf);
+	var dbconf = conf.dbconf;
 } else {
 	// if we're not in PRODUCTION mode, then use
-	const dbconf = 'mongodb://localhost/hjl386';
-	mongoose.connect(dbconf);
+	dbconf = 'mongodb://localhost/hjl386';
 }
 
 mongoose.model('User', User);
@@ -66,4 +64,6 @@ mongoose.model('Match', Match);
 mongoose.model('Review', Review);
 mongoose.model('Critique', Critique);
 mongoose.model('Login', Login);
+
+mongoose.connect(dbconf);
 
