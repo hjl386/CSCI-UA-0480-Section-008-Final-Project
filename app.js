@@ -31,53 +31,97 @@ app.get('/css/base.css', (req, res) => {
 	res.render('base.css');
 });
 
+/* Middleware
+const regOrLog = function(req, res, next){
+	if 	
+	next();
+}
+
+app.use(regOrLog);
+*/
+/* AJAX Fail
+Check index.html for onsubmit on buttons 
+function setReg(){
+	console.log("REGISTERED");
+	return regBool = true;
+}
+
+function setLog(){
+	console.log("LOGGED IN");
+	return logBool = true;
+}
+*/
+
 app.get('/', (req, res) => {
-	if(req.session.username){
-		res.render('index', {loggedIn: true, username: req.session.username});
-	} else {
-		res.render('index', {loggedOut: true});
-	}
+	res.render('index');
 });
 
-app.get('/register', (req, res) => {
-	res.render('register');
-});
-
-app.post('/register', (req, res) => {
-	if(req.body.password.length < 8){
-		res.render('register', {passwordLength: true});
-	} else{
-		Login.findOne({username: req.body.username}, (err, login) => {
-			if(err) {
-				console.log(err);
-			} else if(login){
-				res.render('register', {loginExists: true});
-			} else{
-				bcrypt.hash(req.body.password, saltRounds, (err, hash) => { 
-					if(err){
-						console.log(err);
-					}
-					const logHashed = new Login({
-						username: req.body.username,
-						password: hash
-					});
-					logHashed.save(err => {
+app.post('/', (req, res) => {
+	if(req.body.regUsername){
+		console.log("REGBOOL");
+		if(req.body.regPassword.length < 8){
+			res.render('index', {passwordLength: true});
+		} else{
+			Login.findOne({username: req.body.regUsername}, (err, login) => {
+				if(err) {
+					console.log(err);
+				} else if(login){
+					res.render('index', {loginExists: true});
+				} else{
+					bcrypt.hash(req.body.regPassword, saltRounds, (err, hash) => { 
 						if(err){
 							console.log(err);
 						}
+						const loginHash = new Login({
+							username: req.body.regUsername,
+							password: hash
+						});
+						loginHash.save(err => {
+							if(err){
+								console.log(err);
+							}
+							req.session.regenerate(err => {
+								if(!err){
+									req.session.username = loginHash.username;
+									res.redirect('/userHome');
+								} else {
+									console.log(err);
+									res.send('An error has occured, see the server logs for more information');
+								}
+							});		
+						});
+					});
+				}
+			});
+		}
+	} else if(req.body.logUsername){
+		console.log("LOGBOOL");
+		Login.findOne({username: req.body.logUsername}, (err, login) => {
+			if(err){
+				console.log(err);
+				res.send('An error has occured, see the server logs for more information');
+			} else if(!err && login){
+				bcrypt.compare(req.body.logPassword, login.password, (err, passwordMatch) => {
+					if(passwordMatch){
 						req.session.regenerate(err => {
 							if(!err){
-								req.session.username = logHashed.username;
-								res.redirect('/');
+								req.session.username = login.username;
+								res.redirect('/userHome');
 							} else {
 								console.log(err);
-								res.send('An error has occured, see the server logs for more information');
-							}
-						});		
-					});
-				});
+								res.send('An error has occured, see the server logs for more information');	
+							}		
+						});
+					} else {
+						res.render('index', {fail: true});
+					}
+				});			
+			} else{
+				res.render('index', {loginNotExists: true});
 			}
 		});
+	} else{
+		res.render('index');
 	}
 });
 
