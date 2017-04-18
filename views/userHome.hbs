@@ -19,7 +19,10 @@
 <div class='userHomeBlog'>
 	<div id='todayMatch'> 
 		<h1> Your Matches For Today! </h1>
-		<p> Happy Hunting! </p> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<p> Happy Hunting! </p> <br><br>
+		{{#each people}}
+			<a href='{{this.nickname}}'>{{this.nickname}}</a>	
+		{{/each}}
 	</div>
 	<div id='blog'> 
 		<h1> Your Most Recent Blog Posts </h1>

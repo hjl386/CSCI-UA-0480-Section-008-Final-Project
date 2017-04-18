@@ -33,13 +33,15 @@ const User = new mongoose.Schema({
 	username: {type: String, unique:true}, 				//Unique Username, will have to do validation
 	email: String, 					//Will parse to check for @NYU (Validation)
 	hasSwipes: {type: Boolean, default:false},	//False - Needs Swipes, True - Provides Swipes
-	nickname: String,					//Used for the slug, what people see you as
+	nickname: {type: String, unique:true},					//Used for the slug, what people see you as
 	bio: String,
+	img: { data: Buffer, contentType: String },
 	matches: [Match],				//Array of the people they matched to
 	reviews: [Review],				//Array of reviews other users wrote about you
 	critiques: [Critique]				//Array of critiques you wrote about other users
 });
 User.plugin(URLSlugs('username'));
+User.plugin(URLSlugs('nickname'));
 //User schema - Identifies each individual 
 
 // PROVIDED CODE FOR DATABASE DEPLOYMENT ON TO CIMS 

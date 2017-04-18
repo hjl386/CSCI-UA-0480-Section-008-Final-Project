@@ -128,7 +128,16 @@ app.post('/', (req, res) => {
 
 app.get('/userHome', (req, res) => {  //NEED TO ADD REST OF THE FEATURES 
 	console.log(req.session.username);	//TEST CODE
-	res.render('userHome', {username: req.session.username});
+	User.find((err, users) => {
+		if(err){
+			console.log(err);
+		}
+		const people = users.filter(ele => {
+			return (ele.username !== req.session.username);
+		});
+		console.log(people);
+		res.render('userHome', {username: req.session.username, people: people});
+	});
 });
 
 app.get('/logout', (req, res) => {
@@ -187,12 +196,50 @@ app.post('/editProfile', (req, res) => {
 	});
 });
 
+app.get('/todaysMatches', (req, res) => {
+	res.render('todaysMatches');
+});
+
 app.get('/:slug', (req, res) => {
-	User.find({slug: req.params.slug}, (err, users) => {
+	User.findOne({nickname: req.params.slug}, (err, nn) => {
 		if(err){
 			console.log(err);
+		}else if(nn){
+			res.render('display', {nick: nn.nickname, nn: nn});
+		}else{
+			res.redirect('/userHome');
 		}
-		res.render('profile', {users: users});	
+	});
+});
+/*
+app.post('/:slug', (req, res) -> {
+	
+});
+*/
+app.get('/:slug', (req, res) => {
+	User.findOne({username: req.params.slug}, (err, users) => {
+		if(err){
+			console.log(err);
+		}else if(users){
+			if(users.matches.length > 0){
+				const m = [...users.matches];
+			}else{
+				const m = "No Matches";
+			}
+			if(users.reviews.length > 0){
+				const r = [...users.reviews];
+			}else{
+				const r = "No Reviews";
+			}
+			if(users.critiques.length > 0){
+				const c = [...users.critiques];
+			}else{
+				const c = "No Critiques";
+			}
+			res.render('profile', {users: users, m: m, r: r, c: c});	
+		}else {
+			res.redirect('/');
+		}
 	});
 });
 
