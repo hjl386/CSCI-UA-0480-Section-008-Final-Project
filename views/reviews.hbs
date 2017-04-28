@@ -1,0 +1,19 @@
+<h1> Reviews About You </h1>
+
+<div id='review'>
+    {{#if userReview.connected}}
+        {{#each userReview.connected}}
+            {{this.connected}}
+        {{/each}}
+        <form id='reviewPostedForm method='POST' action=''>
+            <input type='text' name='comment' value='' placeholder='Comment More' required><br>
+            <input id='reviewPostedSubmit' type='submit' value='Comment'>
+        </form>
+    {{else}}
+        <form id='reviewForm' method='POST' action=''>
+            <input type='text' name='originalText' value='' placeholder='CRITIQUE ME' required> <br>
+            <input id='reviewSubmit' type='submit' value='Critique'>
+        </form>
+    {{/if}}
+   
+</div>

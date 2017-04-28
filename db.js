@@ -12,17 +12,19 @@ const User = new mongoose.Schema({
 	confirmpassword: {type: String},
 	swipes: {type: Boolean, default:false}, 
 	description: {type: String},
-    match: {type: Array}
+    liked: {userLike: String},
+    disliked: {userDislike: String}, //{type: Array}
+    connected: {connected: String}
 });
 User.plugin(URLSlugs('username'));
 
-const Match = new mongoose.Schema({
-    username: {type: String}, 
-    matchUsername: {
+const Reviews = new mongoose.Schema({
+    title: {type: String},
+    reviewPostedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    comments: [{
+    reviews: [{
         text: {type: String},
         postedBy: {
             type: mongoose.Schema.Types.ObjectId,
@@ -43,4 +45,5 @@ if(process.env.NODE_ENV === 'PRODUCTION'){
 }
 
 mongoose.model('User', User);
+mongoose.model('Reviews', Reviews);
 mongoose.connect(dbconf);

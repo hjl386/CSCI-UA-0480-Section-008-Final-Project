@@ -18,39 +18,24 @@ function editUserInfoToggle(){
 	divProfile.style.display = divProfile.style.display === 'none' ? 'block' : 'none';
 }
 
-
-//TodaysMatches.hbs - creates Buttons to be appended to a page
-function createButton(context, value, func){
-    const button = document.createElement('input');
-    button.type = 'button';
-    button.value = value;
-    button.onclick = func;
-    context.appendChild(button);
+//TodaysMatches.hbs - If you click yes to match adds to the like array
+function yesMatch(data){
+    alert('YES');
 }
 
-//TodaysMatches.hbs - AJAX injects the selected users information
-function getMatches(){
-    const req = new XMLHttpRequest();
-    let url = 'http://localhost:3000/api/todaysMatches';       //Change the URL to Linserv
-    req.open('GET', url, true);
-    req.addEventListener('load', function handleReveal(){
-        if(req.status >= 200 && req.status < 400){
-            const data = JSON.parse(req.responseText);
-            const revealPerson = document.getElementById('revealPerson');
-            revealPerson.innerHTML = '';
-            console.log('DATA GET MATCHES', data);            
-            data.forEach((user) => {
-                const p = document.createElement('p');
-                p.textContent = user.username + ' ' + user.firstname + ' ' + user.lastname;
-                revealPerson.appendChild(p);
-            });
-            //revealPerson.innerHTML = 'It works';
-        }
-    });
-    req.addEventListener('error', function(){
-        console.log('ERROR');
-    });
-    req.send();
+//TodaysMatches.hbs - If you click no to match adds to the dislike array
+function noMatch(data){
+    alert('NO');
+}
+
+//TodaysMatches.hbs - creates Buttons to be appended to a page
+function createButton(context, value, id, name){
+    const button = document.createElement('input');
+    button.type = 'submit';
+    button.value = value;
+    button.id = id;
+    button.name = name;
+    context.appendChild(button);
 }
 
 //TodaysMatches.hbs - AJAX injects the selected users information
@@ -75,7 +60,10 @@ function revealClickHandler(evt){
             const revealPerson = document.getElementById('revealPerson');
             revealPerson.innerHTML = '';
             const p = document.createElement('p');
-            //p.textContent = data.username + ' ' data.firstname + ' ' data.lastname + ' ' data.swipes;
+            const f = document.createElement('form');
+            f.id='matchWith';
+            f.method='GET';
+            f.action='';
             let swipe = '';
             if(data.swipes){
                 swipe += 'Yep I can swipe you!';
@@ -84,6 +72,9 @@ function revealClickHandler(evt){
             }
             p.textContent = data.username + ' '+ data.firstname + ' ' + data.lastname + ' ' + swipe;
             revealPerson.appendChild(p);
+            createButton(f, 'yes','yesBtn', 'yesOrNo');
+            createButton(f, 'no', 'noBtn', 'yesOrNo');
+            revealPerson.appendChild(f);
         }
     });
     req.addEventListener('error', function(){
