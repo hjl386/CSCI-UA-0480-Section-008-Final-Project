@@ -1,0 +1,40 @@
+{{!-- {{<center>
+<h1> HOME PAGE </h1>
+<h2> New User? Register Now </h2>
+<br>
+<form method='POST' action='' onsubmit='setReg()'>
+<fieldset>
+<legend> REGISTER: </legend>
+	Username: <input type='text' name='regUsername' value=''> <br>
+	Password: <input type='password' name='regPassword' value=''> <br>
+	<input type='submit' value='Register'>
+</fieldset>
+</form> <br>
+<p> Great Choice Making An Account! </p>
+
+{{#if passwordLength}}
+	<p> Error: The inputed password is not long enough </p>
+{{else if loginExists}}
+	<p> Error: The inputed username exists already </p>
+{{/if}}
+
+<h2> Back For More? </h2>
+<br>
+<form method='POST' action='' onsubmit='setLog()'>
+<fieldset>
+<legend> LOGIN: </legend>
+	Username: <input type='text' name='logUsername' value=''> <br>
+	Password: <input type='password' name='logPassword' value=''> <br>
+	<input type='submit' value='Login'>
+</fieldset>
+</form> <br>
+<p> What's Wrong with you? </p>
+
+{{#if loginNotExists}}
+	<p> Error: The inputed username does not exists </p>
+{{else if fail}}
+	<p> Error: The inputed password is not correct <p>
+{{/if}}
+
+</center>
+}} --}}

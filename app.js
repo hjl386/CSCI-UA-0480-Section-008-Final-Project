@@ -32,27 +32,6 @@ app.get('/css/base.css', (req, res) => {
 	res.render('base.css');
 });
 
-/* Middleware
-const regOrLog = function(req, res, next){
-	if 	
-	next();
-}
-
-app.use(regOrLog);
-*/
-/* AJAX Fail
-Check index.html for onsubmit on buttons 
-function setReg(){
-	console.log("REGISTERED");
-	return regBool = true;
-}
-
-function setLog(){
-	console.log("LOGGED IN");
-	return logBool = true;
-}
-*/
-
 app.get('/', (req, res) => {
 	res.render('index');
 });

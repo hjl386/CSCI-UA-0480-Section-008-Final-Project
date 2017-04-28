@@ -1,40 +1,39 @@
 <center>
 <h1> HOME PAGE </h1>
-<h2> New User? Register Now </h2>
-<br>
-<form method='POST' action='' onsubmit='setReg()'>
-<fieldset>
-<legend> REGISTER: </legend>
-	Username: <input type='text' name='regUsername' value=''> <br>
-	Password: <input type='password' name='regPassword' value=''> <br>
-	<input type='submit' value='Register'>
-</fieldset>
-</form> <br>
-<p> Great Choice Making An Account! </p>
+<h2> <a href='/about'>ABOUT</a> | <a href='/map'>MAP</a> </h2>
 
-{{#if passwordLength}}
-	<p> Error: The inputed password is not long enough </p>
-{{else if loginExists}}
-	<p> Error: The inputed username exists already </p>
-{{/if}}
+<div id='loginButtonToggle'>
+	<button onclick='loginToggle()'> Login </button> 
+</div>
 
-<h2> Back For More? </h2>
-<br>
-<form method='POST' action='' onsubmit='setLog()'>
-<fieldset>
-<legend> LOGIN: </legend>
-	Username: <input type='text' name='logUsername' value=''> <br>
-	Password: <input type='password' name='logPassword' value=''> <br>
-	<input type='submit' value='Login'>
-</fieldset>
-</form> <br>
-<p> What's Wrong with you? </p>
+<div style='display:none' id='loginToggle'>
+	<h1> LOGIN </h1>
+	<form method='POST' action=''>
+		Username: <input type='text' name='username' value=''><br>
+		Password: <input type='password' name='password' value=''><br>
+		<input type='submit' value='Login'><br>
+		<input type='checkbox' name='rememberMe' checked='checked'> Remember Me
+	</form>
+</div>
 
-{{#if loginNotExists}}
-	<p> Error: The inputed username does not exists </p>
-{{else if fail}}
-	<p> Error: The inputed password is not correct <p>
-{{/if}}
+<div id='registerButtonToggle'>
+	<button onclick='registerToggle()'> Register </button> 
+</div>
+
+<div style='display:none' id='registerToggle'>
+	<h1> REGISTER </h1>
+	<form method='POST' action=''>
+		Email: <input type='email' name='email' value='' placeholder='email@service.com' required><br>
+		First name: <input type='text' name='firstname' value='' placeholder='Fname' required>
+		Last name: <input type='text' name='lastname' value='' placeholder='Lname' required><br>
+		Username: <input type='text' name='usernameR' value='' placeholder='SwipeGod' pattern='^\S+$' required><br>
+		Password: <input type='password' name='passwordR' value='' required>
+		Confirm Password: <input type='password' name='confirmpassword' value='' required><br>
+		<input type='radio' name='swipes' value='true'> Yes, I have swipes | 
+		<input type='radio' name='swipes' value='false'> No, I do not have swipes <br>
+		Description: <br><textarea rows='4' cols='50' name='description' value='' placeholder='I love downstein!' required></textarea><br>
+		<input type='submit' value='Register'> | <input type='reset' value='Reset'>
+	</form>
+</div>
 
 </center>
-

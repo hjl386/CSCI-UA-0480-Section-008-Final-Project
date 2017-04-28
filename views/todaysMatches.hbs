@@ -1,12 +1,18 @@
-<div>
-	
+<h1> Matches For Today </h1> 
+
+{{#each matches}}
+    <h2> {{this.username}} </h2>
+{{/each}}
+
+<div id='reveal'>
+    <form id='revealForm' method='POST' action=''>
+        {{#each matches}}
+            <input type='radio' class='revealRadio' name='revealRadio' value='{{this.username}}'>{{this.username}}
+        {{/each}}
+        <input id='revealSubmit' type='submit' value='Reveal'>
+    </form>
 </div>
 
-<div>
-	<center>
-	<form method='POST' action=''>
-		<input type='file' onchange='previewFile()'><br>
-		<img src='' height='400' width='400' alt='Image cannot be loaded'>
-	</form>
-	</center>
+<div id='revealPerson'>
+    <p> Hi </p>
 </div>

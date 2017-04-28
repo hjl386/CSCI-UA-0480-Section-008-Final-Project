@@ -1,37 +1,24 @@
-<center>
-<h1> PROFILE SUBMIT </h1>
-</center>
-{{slug}}
-<h2> I will fix the repeat values, need to change from a each loop to something else </h2>
-{{#each users as |user|}}
-	<h1>{{user.username}}!! </h1> (<a href='/profile'>Profile Submit</a>)
-	{{#each user.matches as |match|}}
-		<h3>{{match.username}}</h3>
-	{{/each}}
-	{{#each user.reviews as |review|}}
-		<h3>{{review.comments}}</h3>
-	{{/each}}
-	{{#each user.critiques as |critiques|}}
-		<h3>{{critiques.comments}}</h3>
-	{{/each}}	
-{{/each}}
+<h1> Profile </h1>
 
-<br>
-<h3> Will add the rest from the schema later, looking into inputing true or false values </h3>
-<br><p> For now you can type matches in </p><br>
-<form method='POST' action=''>
-	Match Username: <input type='text' name='username' value=''>
-	<input type='submit' value='Who did you match with?'>
-</form>
+<div id='userInfo'>
+	Email: {{userInfo.email}} <br>
+	Name: {{userInfo.firstname}} {{userInfo.lastname}} <br>
+	Username: {{userInfo.username}} <br>
+	{{!-- {{Change Password Option?}} --}}
+	Swipes: {{#if userInfo.swipes}} I can provide swipes {{else}} I need to be swiped {{/if}} <br>
+	Description: {{userInfo.description}} <br>
+	<div id='editUserInfoToggle'>
+		<button onclick='editUserInfoToggle()'> Edit Profile </button> 
+	</div>
+</div>
 
-<br><p> Other info will be added soon </p><br>
-<form method='POST' action=''>
-	Review Comment: <textarea rows='4' cols='50'name='comments' value=''> </textarea>
-	<br><input type='submit' value='REVIEW THEM'>
-</form>
+<div style='display:none' id='editUserInfo'>
+	<form method='POST' action=''>
+		Email: <input type='email' name='email' value='' placeholder='new_email@service.com'> <br>
+		<input type='radio' name='swipes' value='true'> Yes, I have swipes | 
+		<input type='radio' name='swipes' value='false'> No, I do not have swipes <br>
+		Description: <br><textarea rows='4' cols='50' name='description' value='' placeholder='I love upstein too!'></textarea><br>
+		<input type='submit' value='Save Changes'> | <input type='reset' value='Reset'>
+	</form>
+</div>
 
-<br><p> For now self critiques are allowed until I implement more users </p><br>
-<form method='POST' action=''>
-	Critique Comment: <textarea rows='4' cols='50' name='comments' value=''> </textarea>
-	<br><input type='submit' value='YOUR CRITIQUE'>
-</form>
