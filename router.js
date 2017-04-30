@@ -161,6 +161,13 @@ app.get('/home', (req, res) => {
 				const otherUsers = users.filter(ele => {
 					return (ele.username !== req.session.username);
 				});
+                otherUsers.forEach(ele => {
+                    User.findOneAndUpdate({username: req.session.username, 'potential.list': {$ne: ele.username}}, {$push: {potential: {list: ele.username}}}, (err, dislike) => {
+                        if(err){
+                            console.log(err);
+                        }
+                    });
+                });
 				//console.log(otherUsers);		// TEST
 				res.render('home', {username: req.session.username, otherUsers: otherUsers});
 			}
@@ -393,21 +400,52 @@ app.post('/reviews', (req, res) => {
 
 });
 
-/*
+app.get('/notmatch/:slug', (req, res) => {
+    if(req.session.username === undefined){
+        res.redirect('/');
+    } else{
+        User.findOne({username: req.params.slug}, (err, user) => {
+		    if(err){
+			    console.log(err);
+		    } else if(user){
+                User.findOneAndUpdate({username: {$eq: req.session.username}}, {$push: {disliked: {userDislike: req.params.slug}}}, (err, dislike) => {
+                    if(err){
+                        console.log(err);
+                    } else if(dislike){
+                        res.render('notmatch', {user: user});
+                    }
+                });
+		    } else{
+                res.redirect('/todaysMatches');
+            }
+        });   
+    }
+});
+
 app.get('/:slug', (req, res) => {
-	User.findOne({username: req.params.slug}, (err, user) => {
-		if(err){
-			console.log(err);
-		} else if(user){
-			res.render('home', {fname: user.firstname, lname: user.lastname, username: user.username});
-		} else{
-			res.redirect('/');
-		}
-	});
+    if(req.session.username === undefined){
+        res.redirect('/');
+    } else{
+	    User.findOne({username: req.params.slug}, (err, user) => {
+		    if(err){
+			    console.log(err);
+		    } else if(user){
+                User.findOneAndUpdate({username: {$eq: req.session.username}}, {$push: {liked: {userLike: req.params.slug}}}, (err, like) => {
+                    if(err){
+                        console.log(err);
+                    } else if(like){
+                        res.render('match', {user: user});
+                    }
+                });
+		    } else{
+			    res.redirect('/todaysMatches');
+		    }   
+	    });
+    }
 });
 
 app.post('/:slug', (req, res) => {
-	//User.findOneAndUpdate({slug: req.params.slug}, {
+    
 });
-*/
+
 app.listen(process.env.PORT || PORT);

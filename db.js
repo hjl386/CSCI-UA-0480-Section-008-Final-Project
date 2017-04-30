@@ -12,9 +12,10 @@ const User = new mongoose.Schema({
 	confirmpassword: {type: String},
 	swipes: {type: Boolean, default:false}, 
 	description: {type: String},
-    liked: {userLike: String},
-    disliked: {userDislike: String}, //{type: Array}
-    connected: {connected: String}
+    potential: [{list: String}],
+    liked: [{userLike: String}],
+    disliked: [{userDislike: String}], //{type: Array}
+    connected: [{connected: String}]
 });
 User.plugin(URLSlugs('username'));
 

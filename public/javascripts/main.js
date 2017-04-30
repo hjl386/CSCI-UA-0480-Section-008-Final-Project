@@ -77,7 +77,7 @@ function revealClickHandler(evt){
             noButton.id = 'noBtn';
             const dislikeText = document.createTextNode('Dislike');
             noButton.appendChild(dislikeText);
-            noButton.onclick = function(){ location.href='/'+data.username;};
+            noButton.onclick = function(){ location.href='/notmatch/'+data.username;};
             revealPerson.appendChild(yesButton);
             revealPerson.appendChild(noButton);
         }
