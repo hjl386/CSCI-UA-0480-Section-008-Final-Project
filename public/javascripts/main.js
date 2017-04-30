@@ -42,7 +42,7 @@ function noMatch(data){
 function revealClickHandler(evt){
     evt.preventDefault();
     const req = new XMLHttpRequest();
-    const url = 'http://localhost:3000/api/todaysMatches';
+    const url = 'http://linserv1.cims.nyu.edu:15798/api/todaysMatches';
     req.open('POST', url, true);
     req.setRequestHeader('Content-Type', 'application/json');
     const revealRadio = document.getElementsByName('revealRadio');
