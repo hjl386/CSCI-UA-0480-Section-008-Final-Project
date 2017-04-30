@@ -219,6 +219,23 @@ app.get('/todaysMatches', (req, res) => {
     if(req.session.username === undefined){
         res.redirect('/');
     } else{
+        User.find({username: {$ne: req.session.username}}, (err, matches) => {
+            if(err){
+                console.log(err);
+            } else if(matches.length === 0){
+                console.log('No new matches');
+            } else{
+                res.render('todaysMatches', {matches: matches});
+            }
+        });
+    }
+});
+/*
+app.post('/todaysMatches', (req, res) => {
+    console.log("POST FOR TODAYS MATCHES");
+    if(req.session.username === undefined){
+        res.redirect('/');
+    } else{
         if(req.query.yesOrNo === undefined){
             User.find({username: {$ne: req.session.username}}, (err, matches) => {
                 if(err){
@@ -273,6 +290,7 @@ app.get('/todaysMatches', (req, res) => {
         }
     }
 });
+*/
 /*
 app.get('/api/todaysMatches', (req, res) => {
     if(
@@ -289,6 +307,7 @@ app.get('/api/todaysMatches', (req, res) => {
 */
 
 app.post('/api/todaysMatches', (req, res) => {
+    console.log("POST API FOR TODAYS MATCHES");
 //    console.log('REQ', req.body.username);
     User.findOne({username: {$eq: req.body.username}}, (err, match) => {
         if(err){
@@ -301,6 +320,61 @@ app.post('/api/todaysMatches', (req, res) => {
     });
 });
 
+/*
+    if(req.query.yesOrNo === undefined){
+        User.find({username: {$ne: req.session.username}}, (err, matches) => {
+            if(err){
+                console.log(err);
+            } else if(matches.length === 0){
+                console.log('No new matches');      //No Searches For Now
+            } else{
+                // console.log('FOUND SOME MATCHES');      // Test
+                res.render('todaysMatches', {matches: matches});
+            }
+        });
+    } else if(req.query.yesOrNo === 'yes'){
+        console.log('REQ YES', req.query.yesOrNo);
+        console.log('REQ YES BODY', req.body.username);
+        User.findOneAndUpdate({username: {$eq: req.session.username}}, {$push: {liked: {userLike: req.body.username}}}, (err, like) => {
+            if(err){
+                console.log(err);
+            } else if(like){
+                User.find({username: {$ne: req.session.username}}, (err, matches) => {
+                    if(err){
+                        console.log(err);
+                    } else if(matches){
+                        const notMatchedYet = matches.filter(ele => {
+                            return (ele.username !== req.body.username);
+                        });
+                        console.log('NOT MATCHED YET YES', notMatchedYet);
+                        res.render('todaysMatches',{notMatchedYet: notMatchedYet});
+                    }
+                });
+            }
+        });
+    } else if(req.query.yesOrNo === 'no'){
+        console.log('REQ NO', req.query.yesOrNo);
+        console.log('REQ NO BODY', req.body.username);
+        User.findOneAndUpdate({username: {$eq: req.session.username}}, {$push: {disliked: {userDislike: req.body.username}}}, (err, dislike) => {
+            if(err){
+                console.log(err);
+            } else if(dislike){
+                User.find({username: {$ne: req.session.username}}, (err, matches) => {
+                    if(err){
+                        console.log(err);
+                    } else if(matches){
+                        const notMatchedYet = matches.filter(ele => {
+                            return(ele.username !== req.body.username);
+                        });
+                        console.log('NOT MATCHED YET NO', notMatchedYet);
+                        res.render('todaysMatches', {notMatchedYet: notMatchedYet});
+                    }
+                });
+            }
+        });
+    }
+});
+*/
 app.get('/reviews', (req, res) => {
     if(req.session.username === undefined){
         res.redirect('/');

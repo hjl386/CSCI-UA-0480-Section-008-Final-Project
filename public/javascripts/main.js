@@ -29,14 +29,14 @@ function noMatch(data){
 }
 
 //TodaysMatches.hbs - creates Buttons to be appended to a page
-function createButton(context, value, id, name){
-    const button = document.createElement('input');
-    button.type = 'submit';
-    button.value = value;
-    button.id = id;
-    button.name = name;
-    context.appendChild(button);
-}
+//function createButton(value, id){
+//    const button = document.createElement('button');
+//    button.type = type;
+//    button.value = value;
+//    button.id = id;
+//    button.name = name;
+//    context.appendChild(button);
+//}
 
 //TodaysMatches.hbs - AJAX injects the selected users information
 function revealClickHandler(evt){
@@ -60,10 +60,6 @@ function revealClickHandler(evt){
             const revealPerson = document.getElementById('revealPerson');
             revealPerson.innerHTML = '';
             const p = document.createElement('p');
-            const f = document.createElement('form');
-            f.id='matchWith';
-            f.method='GET';
-            f.action='';
             let swipe = '';
             if(data.swipes){
                 swipe += 'Yep I can swipe you!';
@@ -72,9 +68,18 @@ function revealClickHandler(evt){
             }
             p.textContent = data.username + ' '+ data.firstname + ' ' + data.lastname + ' ' + swipe;
             revealPerson.appendChild(p);
-            createButton(f, 'yes','yesBtn', 'yesOrNo');
-            createButton(f, 'no', 'noBtn', 'yesOrNo');
-            revealPerson.appendChild(f);
+            const yesButton = document.createElement('button');
+            yesButton.id = 'yesBtn';
+            const likeText = document.createTextNode('Like');
+            yesButton.appendChild(likeText);
+            yesButton.onclick = function(){ location.href = '/'+data.username;};
+            const noButton = document.createElement('button');
+            noButton.id = 'noBtn';
+            const dislikeText = document.createTextNode('Dislike');
+            noButton.appendChild(dislikeText);
+            noButton.onclick = function(){ location.href='/'+data.username;};
+            revealPerson.appendChild(yesButton);
+            revealPerson.appendChild(noButton);
         }
     });
     req.addEventListener('error', function(){
